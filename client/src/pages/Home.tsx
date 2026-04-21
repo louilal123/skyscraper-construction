@@ -91,13 +91,13 @@ export default function Home() {
       
     <section className="relative bg-gradient-to-br from-gray-900 to-gray-600 text-white">
       {/* Hero Image Overlay */}
-   <div className="absolute inset-0 opacity-40">
-    <img
-      src="https://images.pexels.com/photos/1216589/pexels-photo-1216589.jpeg?auto=compress&cs=tinysrgb&w=1200"
-      alt="Construction site"
-      className="w-full h-full object-cover"
-    />
-  </div>
+      <div className="absolute inset-0 opacity-40">
+        <img
+          src="https://images.pexels.com/photos/1216589/pexels-photo-1216589.jpeg?auto=compress&cs=tinysrgb&w=1200"
+          alt="Construction site"
+          className="w-full h-full object-cover"
+        />
+      </div>
       <div className="relative container mx-auto px-4 py-16 md:py-24">
         <div className="max-w-3xl">
           <div className="flex items-center gap-2 mb-4">
@@ -111,46 +111,50 @@ export default function Home() {
           <p className="text-lg md:text-xl text-gray-200 mb-8 max-w-2xl">
             Skyscraper Construction and Engineering Services — your trusted partner for design, build, and complete construction solutions in Marinduque and beyond.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4">
+          
+          {/* Buttons always horizontal, wrap if absolutely necessary */}
+          <div className="flex flex-row flex-wrap gap-3">
             <Link
               to="/contact"
-              className="bg-orange-500 hover:bg-orange-600 text-white font-bold px-8 py-4 rounded-lg shadow-lg transition inline-flex items-center justify-center gap-2"
+              className="bg-orange-500 hover:bg-orange-600 text-white font-bold px-5 sm:px-8 py-3 sm:py-4 rounded-lg shadow-lg transition inline-flex items-center justify-center gap-2 text-sm sm:text-base"
             >
               Contact Us
-              <ArrowRightIcon className="h-5 w-5" />
+              <ArrowRightIcon className="h-4 w-4 sm:h-5 sm:w-5" />
             </Link>
             <Link
               to="/projects"
-              className="bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white font-semibold px-8 py-4 rounded-lg border border-white/30 transition inline-flex items-center justify-center"
+              className="bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white font-semibold px-5 sm:px-8 py-3 sm:py-4 rounded-lg border border-white/30 transition inline-flex items-center justify-center text-sm sm:text-base"
             >
               View Our Projects
             </Link>
           </div>
+
           {/* Trust Badges */}
-          <div className="flex flex-wrap gap-6 mt-10">
+          <div className="flex flex-wrap gap-4 sm:gap-6 mt-8 sm:mt-10">
             <div className="flex items-center gap-2">
               <div className="bg-orange-500/20 p-2 rounded-full">
-                <CheckBadgeIcon className="h-5 w-5 text-orange-400" />
+                <CheckBadgeIcon className="h-4 w-4 sm:h-5 sm:w-5 text-orange-400" />
               </div>
-              <span className="text-sm">Design & Build Experts</span>
+              <span className="text-xs sm:text-sm">Design & Build Experts</span>
             </div>
             <div className="flex items-center gap-2">
               <div className="bg-orange-500/20 p-2 rounded-full">
-                <CheckBadgeIcon className="h-5 w-5 text-orange-400" />
+                <CheckBadgeIcon className="h-4 w-4 sm:h-5 sm:w-5 text-orange-400" />
               </div>
-              <span className="text-sm">30% Down Payment</span>
+              <span className="text-xs sm:text-sm">30% Down Payment</span>
             </div>
             <div className="flex items-center gap-2">
               <div className="bg-orange-500/20 p-2 rounded-full">
-                <CheckBadgeIcon className="h-5 w-5 text-orange-400" />
+                <CheckBadgeIcon className="h-4 w-4 sm:h-5 sm:w-5 text-orange-400" />
               </div>
-              <span className="text-sm">Free Consultation</span>
+              <span className="text-xs sm:text-sm">Free Consultation</span>
             </div>
           </div>
-          {/* Address Line - New Addition */}
+
+          {/* Address Line */}
           <div className="flex items-center gap-2 mt-6 text-gray-300 text-sm border-t border-white/20 pt-6">
-            <MapPinIcon className="h-6 w-6 text-orange-400" />
-            <span className="text-sm text-gray-300">Barangay Uno, Buenavista, Marinduque, 4904 Philippines</span>
+            <MapPinIcon className="h-5 w-5 sm:h-6 sm:w-6 text-orange-400 shrink-0" />
+            <span className="text-xs sm:text-sm">Barangay Uno, Buenavista, Marinduque, 4904 Philippines</span>
           </div>
         </div>
       </div>

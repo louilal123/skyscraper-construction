@@ -1,12 +1,15 @@
+// src/components/layout/Layout.tsx
 import { useState } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import {
   HomeIcon,
   WrenchScrewdriverIcon,
   BuildingOfficeIcon,
-  PhoneIcon,DocumentTextIcon,
+  PhoneIcon,
+  DocumentTextIcon,
   Bars3Icon,
-  XMarkIcon,FlagIcon,
+  XMarkIcon,
+  FlagIcon,
 } from '@heroicons/react/24/outline';
 import logoImage from '../../assets/logo_sky.jpg';
 import ChatBot from '../../components/chat/ChatBot';
@@ -20,7 +23,7 @@ export default function Layout() {
     { name: 'Services', href: '/services', icon: WrenchScrewdriverIcon },
     { name: 'Projects', href: '/projects', icon: BuildingOfficeIcon },
     { name: 'Mission & Vision', href: '/mission', icon: FlagIcon },
-     { name: 'Licenses', href: '/licenses', icon: DocumentTextIcon }, 
+    { name: 'Licenses', href: '/licenses', icon: DocumentTextIcon },
   ];
 
   return (
@@ -29,15 +32,14 @@ export default function Layout() {
       <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-sm border-b border-gray-200 shadow-sm">
         {/* Desktop Navigation */}
         <div className="hidden md:block container mx-auto px-4">
-          <div className="flex items-center justify-between h-18">
-            {/* Logo / Brand */}
-            <Link to="/" className="flex items-center gap-3 shrink-0 group">
-              <img 
-                src={logoImage} 
-                alt="Skyscraper Construction and Engineering Services" 
+          <div className="flex items-center justify-between h-20">
+            {/* Logo */}
+            <Link to="/" className="flex items-center gap-3 shrink-0">
+              <img
+                src={logoImage}
+                alt="Skyscraper Construction and Engineering Services"
                 className="h-16 w-auto object-contain"
               />
-              
             </Link>
 
             {/* Nav Links */}
@@ -59,38 +61,42 @@ export default function Layout() {
               to="/contact"
               className="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-6 py-2.5 rounded-lg shadow-sm transition flex items-center gap-2"
             >
-              <PhoneIcon className="h-5 w-5" />
-            Contact Us
+              <PhoneIcon className="h-5 w-5 " />
+              Contact Us
             </Link>
           </div>
         </div>
 
-        {/* Mobile Header */}
-        <div className="md:hidden">
-          <div className="px-4 h-16 flex items-center justify-between">
-            <button
-              onClick={() => setMobileDrawerOpen(true)}
-              className="p-2 -ml-2 hover:bg-gray-100 rounded-lg"
-              aria-label="Open menu"
-            >
-              <Bars3Icon className="h-6 w-6 text-gray-700" />
-            </button>
+      {/* Mobile Header */}
+<div className="md:hidden">
+  <div className="px-4 h-16 flex items-center justify-between">
+    <button
+      onClick={() => setMobileDrawerOpen(true)}
+      className="p-2 -ml-2 hover:bg-gray-100 rounded-lg"
+      aria-label="Open menu"
+    >
+      <Bars3Icon className="h-6 w-6 text-gray-700" />
+    </button>
 
-            <Link to="/" className="flex items-center gap-2">
-              <div className="h-8 w-8 bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg flex items-center justify-center">
-                <BuildingOfficeIcon className="h-5 w-5 text-white" />
-              </div>
-              <span className="text-lg font-bold text-gray-800">SKYSCRAPER</span>
-            </Link>
+    {/* Mobile Logo */}
+    <Link to="/" className="flex items-center">
+      <img
+        src={logoImage}
+        alt="Skyscraper"
+        className="h-10 w-auto object-contain"
+      />
+    </Link>
 
-            <Link
-              to="/contact"
-              className="bg-orange-500 text-white text-sm font-semibold px-4 py-2 rounded-lg"
-            >
-              Quote
-            </Link>
-          </div>
-        </div>
+    {/* Contact Button - replaces empty spacer */}
+    <Link
+      to="/contact"
+      className="bg-orange-500 hover:bg-orange-600 text-white p-2 rounded-full shadow-sm transition"
+      aria-label="Contact Us"
+    >
+      <PhoneIcon className="h-5 w-5" />
+    </Link>
+  </div>
+</div>
       </header>
 
       {/* Mobile Slide‑out Drawer */}
@@ -106,12 +112,15 @@ export default function Layout() {
           }`}
         >
           <div className="p-5 border-b border-gray-200 bg-gradient-to-r from-gray-800 to-gray-900 text-white">
-            <div className="flex items-center gap-2 mb-2">
-              <BuildingOfficeIcon className="h-6 w-6 text-orange-400" />
-              <span className="font-bold text-lg">SKYSCRAPER</span>
+            <div className="flex items-center gap-3 mb-2">
+              <img
+                src={logoImage}
+                alt="Skyscraper"
+                className="h-8 w-auto object-contain bg-white p-1 rounded"
+              />
             </div>
             <p className="text-xs text-gray-300">Construction & Engineering Services</p>
-            <p className="text-xs text-gray-400 mt-1">PCAB Licensed</p>
+            <p className="text-xs text-gray-400 mt-1">PCAB Licensed • SEC Registered</p>
             <button
               onClick={closeDrawer}
               className="absolute top-4 right-4 p-1 hover:bg-gray-700 rounded-full"
@@ -138,7 +147,7 @@ export default function Layout() {
                 onClick={closeDrawer}
                 className="block w-full text-center bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 rounded-lg shadow-sm"
               >
-                Request a Quote
+                Contact Us
               </Link>
             </div>
           </nav>
@@ -163,17 +172,17 @@ export default function Layout() {
             </div>
             <div>
               <h3 className="text-lg font-bold mb-3">Quick Links</h3>
-             <ul className="space-y-2 text-sm">
-              <li><Link to="/services" className="text-gray-300 hover:text-orange-400">Services</Link></li>
-              <li><Link to="/projects" className="text-gray-300 hover:text-orange-400">Projects</Link></li>
-              <li><Link to="/licenses" className="text-gray-300 hover:text-orange-400">Licenses</Link></li>
-              <li><Link to="/contact" className="text-gray-300 hover:text-orange-400">Contact</Link></li>
-            </ul>
+              <ul className="space-y-2 text-sm">
+                <li><Link to="/services" className="text-gray-300 hover:text-orange-400">Services</Link></li>
+                <li><Link to="/projects" className="text-gray-300 hover:text-orange-400">Projects</Link></li>
+                <li><Link to="/licenses" className="text-gray-300 hover:text-orange-400">Licenses</Link></li>
+                <li><Link to="/contact" className="text-gray-300 hover:text-orange-400">Contact</Link></li>
+              </ul>
             </div>
             <div>
               <h3 className="text-lg font-bold mb-3">Contact Us</h3>
-              <p className="text-gray-300 text-sm"> We are located in Barangay Uno, Buenavista, Marinduque 4904</p>
-              <p className="text-gray-300 text-sm mt-2"> Call or message us for inquiries: 09480498948</p>
+              <p className="text-gray-300 text-sm"> Barangay Uno, Buenavista, Marinduque 4904</p>
+              <p className="text-gray-300 text-sm mt-2"> 09480498948</p>
             </div>
           </div>
           <div className="border-t border-gray-700 mt-8 pt-6 text-center text-sm text-gray-400">
@@ -181,7 +190,8 @@ export default function Layout() {
           </div>
         </div>
       </footer>
-        <ChatBot />
+
+      <ChatBot />
     </div>
   );
 }
