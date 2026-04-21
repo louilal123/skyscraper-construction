@@ -1,5 +1,5 @@
 // src/pages/Contact.tsx
-
+import { Link } from 'react-router-dom';
 import {
   PhoneIcon,
   EnvelopeIcon,
@@ -13,30 +13,30 @@ export default function Contact() {
     {
       icon: PhoneIcon,
       label: 'Phone',
-      value: '+63 912 345 6789', // Replace with actual number
+      value: '+63 912 345 6789', 
       link: 'tel:+639123456789',
-     
+        color: 'text-gray-700 bg-gray-50',
     },
     {
       icon: EnvelopeIcon,
       label: 'Email',
       value: 'info@skyscraperconstruction.ph',
       link: 'mailto:info@skyscraperconstruction.ph',
-     
+        color: 'text-gray-700 bg-gray-50',
     },
     {
       icon: BuildingOfficeIcon,
       label: 'Facebook',
       value: 'SkyscraperCES',
       link: 'https://www.facebook.com/SkyscraperCES',
-     
+        color: 'text-gray-700 bg-gray-50',
     },
     {
       icon: MapPinIcon,
       label: 'Office Address',
       value: 'Barangay Uno, Buenavista, Marinduque 4904',
       link: 'https://maps.google.com/?q=Barangay+Uno,+Buenavista,+Marinduque+4904',
-      
+      color: 'text-gray-700 bg-gray-50',
     },
   ];
 
