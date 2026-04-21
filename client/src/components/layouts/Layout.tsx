@@ -7,7 +7,7 @@ import {
   BuildingOfficeIcon,
   PhoneIcon,
   Bars3Icon,
-  XMarkIcon,
+  XMarkIcon,FlagIcon,
 } from '@heroicons/react/24/outline';
 
 export default function Layout() {
@@ -18,7 +18,7 @@ export default function Layout() {
     { name: 'Home', href: '/', icon: HomeIcon },
     { name: 'Services', href: '/services', icon: WrenchScrewdriverIcon },
     { name: 'Projects', href: '/projects', icon: BuildingOfficeIcon },
-    { name: 'Contact', href: '/contact', icon: PhoneIcon },
+    { name: 'Mission & Vision', href: '/mission', icon: FlagIcon },
   ];
 
   return (
@@ -62,8 +62,8 @@ export default function Layout() {
               to="/contact"
               className="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-6 py-2.5 rounded-lg shadow-sm transition flex items-center gap-2"
             >
-              <a className="h-5 w-5" />
-             Inquire Now
+              <PhoneIcon className="h-5 w-5" />
+            Contact Us
             </Link>
           </div>
         </div>
@@ -141,7 +141,7 @@ export default function Layout() {
                 onClick={closeDrawer}
                 className="block w-full text-center bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 rounded-lg shadow-sm"
               >
-                Inquire now
+                Request a Quote
               </Link>
             </div>
           </nav>
@@ -174,8 +174,8 @@ export default function Layout() {
             </div>
             <div>
               <h3 className="text-lg font-bold mb-3">Contact Us</h3>
-              <p className="text-gray-300 text-sm">📍 Barangay Uno, Buenavista, Marinduque 4904</p>
-              <p className="text-gray-300 text-sm mt-2">📞 Call or message us for inquiries</p>
+              <p className="text-gray-300 text-sm"> We are located in Barangay Uno, Buenavista, Marinduque 4904</p>
+              <p className="text-gray-300 text-sm mt-2"> Call or message us for inquiries: 09480498948</p>
             </div>
           </div>
           <div className="border-t border-gray-700 mt-8 pt-6 text-center text-sm text-gray-400">
