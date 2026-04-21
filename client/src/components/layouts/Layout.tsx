@@ -62,8 +62,8 @@ export default function Layout() {
               to="/contact"
               className="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-6 py-2.5 rounded-lg shadow-sm transition flex items-center gap-2"
             >
-              <PhoneIcon className="h-5 w-5" />
-              Get a Quote
+              <a className="h-5 w-5" />
+             Inquire Now
             </Link>
           </div>
         </div>
@@ -141,7 +141,7 @@ export default function Layout() {
                 onClick={closeDrawer}
                 className="block w-full text-center bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 rounded-lg shadow-sm"
               >
-                Request a Quote
+                Inquire now
               </Link>
             </div>
           </nav>
