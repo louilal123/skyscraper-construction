@@ -19,8 +19,8 @@ export default function Contact() {
     {
       icon: EnvelopeIcon,
       label: 'Email',
-      value: 'info@skyscraperconstruction.ph',
-      link: 'mailto:info@skyscraperconstruction.ph',
+      value: 'jemmarsaporna@gmail.com',
+      link: 'mailto:jemmarsaporna@gmail.com',
         color: 'text-gray-700 bg-gray-50',
     },
     {

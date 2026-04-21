@@ -1,4 +1,3 @@
-// src/components/layout/Layout.tsx
 import { useState } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import {
@@ -9,6 +8,7 @@ import {
   Bars3Icon,
   XMarkIcon,FlagIcon,
 } from '@heroicons/react/24/outline';
+import logoImage from '../../assets/logo_sky.jpg';
 
 export default function Layout() {
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
@@ -30,17 +30,12 @@ export default function Layout() {
           <div className="flex items-center justify-between h-20">
             {/* Logo / Brand */}
             <Link to="/" className="flex items-center gap-3 shrink-0 group">
-              <div className="h-10 w-10 bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg flex items-center justify-center shadow-md">
-                <BuildingOfficeIcon className="h-6 w-6 text-white" />
-              </div>
-              <div className="leading-tight">
-                <span className="text-xl font-extrabold tracking-tight text-gray-800 block">
-                  SKYSCRAPER
-                </span>
-                <span className="text-xs font-semibold text-orange-600 tracking-wider">
-                  CONSTRUCTION & ENGINEERING
-                </span>
-              </div>
+              <img 
+                src={logoImage} 
+                alt="Skyscraper Construction and Engineering Services" 
+                className="h-12 w-auto object-contain"
+              />
+              
             </Link>
 
             {/* Nav Links */}
