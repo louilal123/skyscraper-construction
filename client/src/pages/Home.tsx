@@ -143,8 +143,8 @@ export default function Home() {
           </div>
           {/* Address Line - New Addition */}
           <div className="flex items-center gap-2 mt-6 text-gray-300 text-sm border-t border-white/20 pt-6">
-            <MapPinIcon className="h-5 w-5 text-orange-400" />
-            <span>Barangay Uno, Buenavista, Marinduque 4904</span>
+            <MapPinIcon className="h-6 w-6 text-orange-400" />
+            <span className="text-sm text-gray-300">Barangay Uno, Buenavista, Marinduque, 4904 Philippines</span>
           </div>
         </div>
       </div>
@@ -319,7 +319,7 @@ export default function Home() {
             </a>
           </div>
           <p className="text-gray-400 text-sm mt-6">
-            📍 Barangay Uno, Buenavista, Marinduque 4904
+             Barangay Uno, Buenavista, Marinduque 4904
           </p>
         </div>
       </section>

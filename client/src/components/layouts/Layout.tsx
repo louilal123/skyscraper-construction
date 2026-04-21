@@ -4,11 +4,12 @@ import {
   HomeIcon,
   WrenchScrewdriverIcon,
   BuildingOfficeIcon,
-  PhoneIcon,
+  PhoneIcon,DocumentTextIcon,
   Bars3Icon,
   XMarkIcon,FlagIcon,
 } from '@heroicons/react/24/outline';
 import logoImage from '../../assets/logo_sky.jpg';
+import ChatBot from '../../components/chat/ChatBot';
 
 export default function Layout() {
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
@@ -19,6 +20,7 @@ export default function Layout() {
     { name: 'Services', href: '/services', icon: WrenchScrewdriverIcon },
     { name: 'Projects', href: '/projects', icon: BuildingOfficeIcon },
     { name: 'Mission & Vision', href: '/mission', icon: FlagIcon },
+     { name: 'Licenses', href: '/licenses', icon: DocumentTextIcon }, 
   ];
 
   return (
@@ -161,11 +163,12 @@ export default function Layout() {
             </div>
             <div>
               <h3 className="text-lg font-bold mb-3">Quick Links</h3>
-              <ul className="space-y-2 text-sm">
-                <li><Link to="/services" className="text-gray-300 hover:text-orange-400">Services</Link></li>
-                <li><Link to="/projects" className="text-gray-300 hover:text-orange-400">Projects</Link></li>
-                <li><Link to="/contact" className="text-gray-300 hover:text-orange-400">Contact</Link></li>
-              </ul>
+             <ul className="space-y-2 text-sm">
+              <li><Link to="/services" className="text-gray-300 hover:text-orange-400">Services</Link></li>
+              <li><Link to="/projects" className="text-gray-300 hover:text-orange-400">Projects</Link></li>
+              <li><Link to="/licenses" className="text-gray-300 hover:text-orange-400">Licenses</Link></li>
+              <li><Link to="/contact" className="text-gray-300 hover:text-orange-400">Contact</Link></li>
+            </ul>
             </div>
             <div>
               <h3 className="text-lg font-bold mb-3">Contact Us</h3>
@@ -178,6 +181,7 @@ export default function Layout() {
           </div>
         </div>
       </footer>
+        <ChatBot />
     </div>
   );
 }

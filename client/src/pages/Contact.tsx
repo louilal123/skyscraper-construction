@@ -83,7 +83,7 @@ export default function Contact() {
       </section>
 
       {/* Google Map Section */}
-      <section className="container mx-auto px-4 py-8">
+      <section className="container mx-auto px-4 py-4">
         <div className="max-w-6xl mx-auto">
           <div className="bg-white p-4 rounded-xl shadow-md border border-gray-200">
             <div className="flex items-center gap-2 mb-4">
@@ -95,20 +95,10 @@ export default function Contact() {
             </p>
             {/* Embedded Google Map */}
             <div className="rounded-lg overflow-hidden border border-gray-200 h-96 w-full">
-              <iframe
-                title="Skyscraper Construction Office Location"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3876.123456789012!2d121.123456!3d13.123456!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTPCsDA3JzI0LjQiTiAxMjHCsDA3JzI0LjQiRQ!5e0!3m2!1sen!2sph!4v1610000000000!5m2!1sen!2sph"
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              ></iframe>
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31068.26744241269!2d121.92155927977556!3d13.254571003185337!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33a33c316f3ef52d%3A0x38e89c5d0f46e7d2!2sPoblacion%20%2CBarangay%20I%20%2CBuenavista%20%2CBuenavista%20%2CMarinduque!5e0!3m2!1sen!2sph!4v1776782404077!5m2!1sen!2sph"  loading="lazy" className="w-full h-full border-0" allowFullScreen referrerPolicy="no-referrer-when-downgrade"></iframe>
+             
             </div>
-            <p className="text-xs text-gray-500 mt-3 text-center">
-              ⚠️ Note: The map above uses placeholder coordinates. For production, replace the iframe src with the exact Google Maps embed link for Barangay Uno, Buenavista, Marinduque.
-            </p>
+            
           </div>
         </div>
       </section>
