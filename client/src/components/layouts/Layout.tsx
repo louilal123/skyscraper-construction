@@ -27,13 +27,13 @@ export default function Layout() {
       <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-sm border-b border-gray-200 shadow-sm">
         {/* Desktop Navigation */}
         <div className="hidden md:block container mx-auto px-4">
-          <div className="flex items-center justify-between h-20">
+          <div className="flex items-center justify-between h-18">
             {/* Logo / Brand */}
             <Link to="/" className="flex items-center gap-3 shrink-0 group">
               <img 
                 src={logoImage} 
                 alt="Skyscraper Construction and Engineering Services" 
-                className="h-12 w-auto object-contain"
+                className="h-16 w-auto object-contain"
               />
               
             </Link>
