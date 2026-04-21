@@ -48,7 +48,13 @@ export default function Home() {
       image: 'https://images.pexels.com/photos/3990359/pexels-photo-3990359.jpeg?auto=compress&cs=tinysrgb&w=600',
     },
     {
-      title: 'Architectural & Structural',
+      title: 'Architectural',
+      description: 'Professional design, planning, and Architectural engineering services.',
+      icon: PencilSquareIcon,
+      image: 'https://images.pexels.com/photos/1216589/pexels-photo-1216589.jpeg?auto=compress&cs=tinysrgb&w=600',
+    },
+    {
+      title: 'Structural',
       description: 'Professional design, planning, and structural engineering services.',
       icon: PencilSquareIcon,
       image: 'https://images.pexels.com/photos/1216589/pexels-photo-1216589.jpeg?auto=compress&cs=tinysrgb&w=600',

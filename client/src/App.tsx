@@ -5,6 +5,9 @@ import Home from './pages/Home';
 import Mission from './pages/Mission';
 import Contact from './pages/Contact';
 import Licenses from './pages/Licenses';
+import Services from './pages/Services';
+import Projects from './pages/Projects';
+
 function App() {
   return (
     <BrowserRouter>
@@ -14,11 +17,9 @@ function App() {
            <Route path="/mission" element={<Mission />} />
            <Route path="/contact" element={<Contact />} />
             <Route path="/licenses" element={<Licenses />} />
-          {/* Placeholder routes - add later */}
-          <Route path="/services" element={<div className="container mx-auto px-4 py-12"><h1 className="text-3xl font-bold">Services Page</h1><p className="mt-4">Coming soon.</p></div>} />
-          <Route path="/projects" element={<div className="container mx-auto px-4 py-12"><h1 className="text-3xl font-bold">Projects Page</h1><p className="mt-4">Coming soon.</p></div>} />
-          <Route path="/contact" element={<div className="container mx-auto px-4 py-12"><h1 className="text-3xl font-bold">Contact Page</h1><p className="mt-4">Coming soon.</p></div>} />
-        </Route>
+             <Route path="/services" element={<Services />} />
+            <Route path="/projects" element={<Projects />} />
+          </Route>
       </Routes>
     </BrowserRouter>
   );
