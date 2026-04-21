@@ -14,7 +14,6 @@ import {
   ClockIcon,MapPinIcon,
   CurrencyDollarIcon,
 } from '@heroicons/react/24/outline';
-import bgImage from '../assets/bg.png';
 
 export default function Home() {
   const services = [
