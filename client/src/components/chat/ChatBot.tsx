@@ -20,7 +20,6 @@ export default function ChatBot() {
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  // Refs for typing animation
   const typingIntervalRef = useRef<number | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -47,7 +46,7 @@ export default function ChatBot() {
     let index = 0;
     if (typingIntervalRef.current) clearInterval(typingIntervalRef.current);
 
-    typingIntervalRef.current = setInterval(() => {
+    typingIntervalRef.current = window.setInterval(() => {
       index++;
       updateCallback(fullText.slice(0, index));
       if (index >= fullText.length) {
@@ -61,7 +60,6 @@ export default function ChatBot() {
   const handleSend = async () => {
     if (!input.trim() || isLoading) return;
 
-    // Cancel any ongoing typing animation
     if (typingIntervalRef.current) {
       clearInterval(typingIntervalRef.current);
       typingIntervalRef.current = null;
@@ -72,13 +70,11 @@ export default function ChatBot() {
     setMessages((prev) => [...prev, { text: userMessage, isUser: true }]);
     setIsLoading(true);
 
-    // Add placeholder for AI response
     setMessages((prev) => [...prev, { text: '', isUser: false }]);
 
     try {
       const fullReply = await chatWithAI(userMessage);
 
-      // Start typing animation into the last message
       typewriterEffect(
         fullReply,
         (partial) => {
@@ -89,7 +85,6 @@ export default function ChatBot() {
           });
         },
         () => {
-          // Typing complete
           setIsLoading(false);
         }
       );
@@ -130,11 +125,11 @@ export default function ChatBot() {
           <div
             className="
               fixed z-50 bg-white rounded-xl shadow-2xl border border-gray-200 flex flex-col overflow-hidden
-              inset-4 sm:inset-auto sm:bottom-24 sm:right-6 sm:w-96 sm:max-w-[calc(100vw-3rem)]
-              h-[calc(100vh-2rem)] sm:h-[500px] sm:max-h-[calc(100vh-8rem)]
+              inset-2 sm:inset-auto sm:bottom-24 sm:right-6 sm:w-96 sm:max-w-[calc(100vw-2rem)]
+              h-[calc(100dvh-1rem)] sm:h-[500px] sm:max-h-[calc(100dvh-6rem)]
             "
           >
-            <div className="bg-orange-500 text-white px-4 py-3 flex items-center justify-between">
+            <div className="bg-orange-500 text-white px-4 py-3 flex items-center justify-between shrink-0">
               <div className="flex items-center gap-2">
                 <ChatBubbleLeftRightIcon className="h-5 w-5" />
                 <span className="font-semibold text-sm sm:text-base">
@@ -169,7 +164,7 @@ export default function ChatBot() {
               <div ref={messagesEndRef} />
             </div>
 
-            <div className="border-t border-gray-200 p-2 sm:p-3 bg-white flex gap-2">
+            <div className="border-t border-gray-200 p-2 sm:p-3 bg-white flex gap-2 shrink-0">
               <input
                 type="text"
                 value={input}
