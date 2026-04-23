@@ -14,7 +14,7 @@ const HOST = '0.0.0.0'; // Critical for Render!
 
 app.use(cors({
     origin: process.env.NODE_ENV === 'production'
-        ? 'https://skyscraper-construction.vercel.app'
+        ? 'https://skyscraper-construction.onrender.com'
         : 'http://localhost:5173'
 }));
 app.use(express.json());
