@@ -7,6 +7,7 @@ const router = express.Router();
 // Groq client reads GROQ_API_KEY automatically from environment
 const groq = new Groq();
 
+
 const SYSTEM_PROMPT = `You are a helpful assistant for Skyscraper Construction and Engineering Services. You answer general questions clearly and concisely.`;
 
 router.post('/', async (req, res) => {
