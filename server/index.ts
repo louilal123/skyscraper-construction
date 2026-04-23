@@ -1,37 +1,35 @@
 import dotenv from 'dotenv';
-dotenv.config();
+import path from 'path';
+
+// Load .env from the same directory as this file
+dotenv.config({ path: path.resolve(__dirname, '.env') });
+
+// Quick verification (remove after confirming it works)
+console.log('GROQ key loaded:', process.env.GROQ_API_KEY ? '✅' : '❌');
 
 import express from 'express';
 import cors from 'cors';
 import chatRouter from './routes/chat';
 import testRouter from './routes/testroute';
-import path from 'path';
-
-// Load .env file explicitly from the same directory as this file
-dotenv.config({ path: path.resolve(__dirname, '.env') });
-
-// Verify it loaded
-console.log('GROQ key loaded:', process.env.GROQ_API_KEY ? '✅' : '❌');
 
 const app = express();
-// const PORT = process.env.PORT || 3000;
 
 const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
-const HOST = '0.0.0.0'; // Critical for Render!
+const HOST = '0.0.0.0'; // Required for Render
 
 app.use(cors({
     origin: process.env.NODE_ENV === 'production'
         ? 'https://skyscraper-construction.vercel.app'
-        : 'http://localhost:5173'
+        : 'http://localhost:5173',
 }));
 app.use(express.json());
 app.use('/api/test', testRouter);
 app.use('/api/chat', chatRouter);
 
-// app.listen(PORT, () => {
-//     console.log(`Server running on http://localhost:${PORT}`);
-// });
-
 app.listen(PORT, HOST, () => {
     console.log(`Server running on http://${HOST}:${PORT}`);
 });
+
+// app.listen(PORT, () => {
+//     console.log(`Server running on http://localhost:${PORT}`);
+// });
