@@ -1,9 +1,13 @@
+// server\routes\chat.ts
 import express from 'express';
-import { GoogleGenAI } from '@google/genai';
+import Groq from 'groq-sdk';
 
 const router = express.Router();
 
-const SYSTEM_PROMPT = `You are a helpful assistant for people. And you answer questions that are general and expound your answers. Be brief.`;
+// Groq client reads GROQ_API_KEY automatically from environment
+const groq = new Groq({ apiKey: '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' });
+
+const SYSTEM_PROMPT = `You are a helpful assistant for Skyscraper Construction and Engineering Services. You answer general questions clearly and concisely.`;
 
 router.post('/', async (req, res) => {
     const { message } = req.body;
@@ -12,15 +16,20 @@ router.post('/', async (req, res) => {
     }
 
     try {
-        const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
-        const fullPrompt = `${SYSTEM_PROMPT}\n\nUser: ${message}\nAssistant:`;
-        const response = await ai.models.generateContent({
-            model: 'gemini-3-flash-preview',
-            contents: fullPrompt,
+        const chatCompletion = await groq.chat.completions.create({
+            messages: [
+                { role: 'system', content: SYSTEM_PROMPT },
+                { role: 'user', content: message },
+            ],
+            model: 'llama-3.3-70b-versatile', // or any other Groq-supported model
+            temperature: 0.7,                 // 0 = factual, 1 = creative
+            max_tokens: 1024,
         });
-        res.json({ reply: response.text });
-    } catch (error) {
-        console.error('Gemini error:', error);
+
+        const reply = chatCompletion.choices[0]?.message?.content || 'No response generated.';
+        res.json({ reply });
+    } catch (error: any) {
+        console.error('Groq error:', error?.message || error);
         res.status(500).json({ error: 'AI service unavailable' });
     }
 });

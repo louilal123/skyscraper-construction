@@ -5,6 +5,13 @@ import express from 'express';
 import cors from 'cors';
 import chatRouter from './routes/chat';
 import testRouter from './routes/testroute';
+import path from 'path';
+
+// Load .env file explicitly from the same directory as this file
+dotenv.config({ path: path.resolve(__dirname, '.env') });
+
+// Verify it loaded
+console.log('GROQ key loaded:', process.env.GROQ_API_KEY ? '✅' : '❌');
 
 const app = express();
 // const PORT = process.env.PORT || 3000;
