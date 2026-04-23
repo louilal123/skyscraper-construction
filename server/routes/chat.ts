@@ -5,7 +5,7 @@ import Groq from 'groq-sdk';
 const router = express.Router();
 
 // Groq client reads GROQ_API_KEY automatically from environment
-const groq = new Groq({ apiKey: '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' });
+const groq = new Groq();
 
 const SYSTEM_PROMPT = `You are a helpful assistant for Skyscraper Construction and Engineering Services. You answer general questions clearly and concisely.`;
 
