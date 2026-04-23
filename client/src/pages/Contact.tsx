@@ -6,7 +6,7 @@ import {
   BuildingOfficeIcon,
   ClockIcon,
 } from '@heroicons/react/24/outline';
-
+import companyLogo from '../assets/logol.jpg';
 export default function Contact() {
   const contactInfo = [
     {
@@ -82,6 +82,52 @@ export default function Contact() {
         </div>
       </section>
 
+      {/* Business Hours with Office Photo - Two Column Layout */}
+      <section className="container mx-auto px-4 py-8">
+        <div className="max-w-6xl mx-auto bg-white p-6 md:p-8 rounded-xl shadow-sm border border-gray-200">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-center">
+            
+            {/* Left Column: Office Building Photo */}
+            <div className="flex justify-center">
+              <img
+                src={companyLogo} // This is the office building photo (logol.jpg)
+                alt="Skyscraper Construction Office Building"
+                className="w-full h-auto max-h-64 sm:max-h-80 md:max-h-96 object-cover rounded-lg shadow-sm"
+              />
+            </div>
+
+            {/* Right Column: Business Hours */}
+            <div>
+              {/* Hours Header */}
+              <div className="flex items-center gap-3 mb-4">
+                <ClockIcon className="h-6 w-6 text-orange-500" />
+                <h3 className="text-xl font-bold text-gray-800">Business Hours</h3>
+              </div>
+
+              {/* Hours Grid */}
+              <div className="grid grid-cols-2 gap-y-3 text-gray-700">
+                <div>
+                  <p className="font-medium">Monday - Friday</p>
+                  <p className="text-sm">8:00 AM - 5:00 PM</p>
+                </div>
+                <div>
+                  <p className="font-medium">Saturday</p>
+                  <p className="text-sm">8:00 AM - 12:00 PM</p>
+                </div>
+                <div className="col-span-2">
+                  <p className="font-medium">Sunday</p>
+                  <p className="text-sm">Closed</p>
+                </div>
+              </div>
+
+              <p className="text-sm text-gray-500 mt-4">
+                * We are also available by phone and email outside business hours for urgent inquiries.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Google Map Section */}
       <section className="container mx-auto px-4 py-4">
         <div className="max-w-6xl mx-auto">
@@ -99,34 +145,8 @@ export default function Contact() {
              
             </div>
             
+            
           </div>
-        </div>
-      </section>
-
-      {/* Business Hours */}
-      <section className="container mx-auto px-4 py-8">
-        <div className="max-w-3xl mx-auto bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-          <div className="flex items-center gap-3 mb-4">
-            <ClockIcon className="h-6 w-6 text-orange-500" />
-            <h3 className="text-xl font-bold text-gray-800">Business Hours</h3>
-          </div>
-          <div className="grid grid-cols-2 gap-4 text-gray-700">
-            <div>
-              <p className="font-medium">Monday - Friday</p>
-              <p>8:00 AM - 5:00 PM</p>
-            </div>
-            <div>
-              <p className="font-medium">Saturday</p>
-              <p>8:00 AM - 12:00 PM</p>
-            </div>
-            <div>
-              <p className="font-medium">Sunday</p>
-              <p>Closed</p>
-            </div>
-          </div>
-          <p className="text-sm text-gray-500 mt-4">
-            * We are also available by phone and email outside business hours for urgent inquiries.
-          </p>
         </div>
       </section>
 

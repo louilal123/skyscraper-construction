@@ -14,7 +14,7 @@ import {
   ClockIcon,MapPinIcon,
   CurrencyDollarIcon,
 } from '@heroicons/react/24/outline';
-
+import bgimage from '../assets/bg-image.png';
 export default function Home() {
   const services = [
     {
@@ -91,11 +91,11 @@ export default function Home() {
       
     <section className="relative bg-gradient-to-br from-gray-900 to-gray-600 text-white">
       {/* Hero Image Overlay */}
-      <div className="absolute inset-0 opacity-40">
+      <div className="absolute inset-0 opacity-40 bg-scroll ">
         <img
-          src="https://images.pexels.com/photos/1216589/pexels-photo-1216589.jpeg?auto=compress&cs=tinysrgb&w=1200"
+          src={bgimage}
           alt="Construction site"
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover bg-scroll "
         />
       </div>
       <div className="relative container mx-auto px-4 py-16 md:py-24">

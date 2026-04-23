@@ -61,45 +61,37 @@ export default function Layout() {
               to="/contact"
               className="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-6 py-2.5 rounded-lg shadow-sm transition flex items-center gap-2"
             >
-              <PhoneIcon className="h-5 w-5 " />
+              <PhoneIcon className="h-5 w-5" />
               Contact Us
             </Link>
           </div>
         </div>
 
-      {/* Mobile Header */}
-<div className="md:hidden">
-  <div className="px-4 h-16 flex items-center justify-between">
-    <button
-      onClick={() => setMobileDrawerOpen(true)}
-      className="p-2 -ml-2 hover:bg-gray-100 rounded-lg"
-      aria-label="Open menu"
-    >
-      <Bars3Icon className="h-6 w-6 text-gray-700" />
-    </button>
+        {/* Mobile Header */}
+        <div className="md:hidden">
+          <div className="px-4 h-16 flex items-center justify-between">
+            {/* Logo on the left */}
+            <Link to="/" className="flex items-center">
+              <img
+                src={logoImage}
+                alt="Skyscraper"
+                className="h-10 w-auto object-contain"
+              />
+            </Link>
 
-    {/* Mobile Logo */}
-    <Link to="/" className="flex items-center">
-      <img
-        src={logoImage}
-        alt="Skyscraper"
-        className="h-10 w-auto object-contain"
-      />
-    </Link>
-
-    {/* Contact Button - replaces empty spacer */}
-    <Link
-      to="/contact"
-      className="bg-orange-500 hover:bg-orange-600 text-white p-2 rounded-full shadow-sm transition"
-      aria-label="Contact Us"
-    >
-      <PhoneIcon className="h-5 w-5" />
-    </Link>
-  </div>
-</div>
+            {/* Menu button on the right */}
+            <button
+              onClick={() => setMobileDrawerOpen(true)}
+              className="p-2 -mr-2 hover:bg-gray-100 rounded-lg"
+              aria-label="Open menu"
+            >
+              <Bars3Icon className="h-6 w-6 text-gray-700" />
+            </button>
+          </div>
+        </div>
       </header>
 
-      {/* Mobile Slide‑out Drawer */}
+      {/* Mobile Slide‑out Drawer (slides from right) */}
       <div
         className={`fixed inset-0 z-50 md:hidden transition-opacity duration-300 ${
           mobileDrawerOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
@@ -107,8 +99,8 @@ export default function Layout() {
       >
         <div className="absolute inset-0 bg-black/50" onClick={closeDrawer} />
         <div
-          className={`absolute left-0 top-0 h-full w-72 max-w-[85%] bg-white shadow-xl transform transition-transform duration-300 ${
-            mobileDrawerOpen ? 'translate-x-0' : '-translate-x-full'
+          className={`absolute right-0 top-0 h-full w-72 max-w-[85%] bg-white shadow-xl transform transition-transform duration-300 ${
+            mobileDrawerOpen ? 'translate-x-0' : 'translate-x-full'
           }`}
         >
           <div className="p-5 border-b border-gray-200 bg-gradient-to-r from-gray-800 to-gray-900 text-white">
@@ -181,8 +173,8 @@ export default function Layout() {
             </div>
             <div>
               <h3 className="text-lg font-bold mb-3">Contact Us</h3>
-              <p className="text-gray-300 text-sm"> Barangay Uno, Buenavista, Marinduque 4904</p>
-              <p className="text-gray-300 text-sm mt-2"> 09480498948</p>
+              <p className="text-gray-300 text-sm">📍 Barangay Uno, Buenavista, Marinduque 4904</p>
+              <p className="text-gray-300 text-sm mt-2">📞 09480498948</p>
             </div>
           </div>
           <div className="border-t border-gray-700 mt-8 pt-6 text-center text-sm text-gray-400">
