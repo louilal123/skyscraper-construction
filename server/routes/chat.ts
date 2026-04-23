@@ -3,7 +3,7 @@ import { GoogleGenAI } from '@google/genai';
 
 const router = express.Router();
 
-const SYSTEM_PROMPT = `You are a helpful assistant for people. And you answer questions that are general and expound your answers. Be helpful and be proactive.`;
+const SYSTEM_PROMPT = `You are a helpful assistant for people. And you answer questions that are general and expound your answers. Be brief.`;
 
 router.post('/', async (req, res) => {
     const { message } = req.body;
