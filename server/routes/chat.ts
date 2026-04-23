@@ -1,12 +1,11 @@
 // server\routes\chat.ts
 import express from 'express';
 import Groq from 'groq-sdk';
-
+import dotenv from 'dotenv';
+dotenv.config(); // Safe redundant load
 const router = express.Router();
 
-// Groq client reads GROQ_API_KEY automatically from environment
-const groq = new Groq();
-
+const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
 const SYSTEM_PROMPT = `You are a helpful assistant for Skyscraper Construction and Engineering Services. You answer general questions clearly and concisely.`;
 
