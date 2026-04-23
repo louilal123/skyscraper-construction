@@ -12,7 +12,11 @@ const app = express();
 const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
 const HOST = '0.0.0.0'; // Critical for Render!
 
-app.use(cors());
+app.use(cors({
+    origin: process.env.NODE_ENV === 'production'
+        ? 'https://skyscraper-construction.onrender.com'
+        : 'http://localhost:5173'
+}));
 app.use(express.json());
 app.use('/api/test', testRouter);
 app.use('/api/chat', chatRouter);
