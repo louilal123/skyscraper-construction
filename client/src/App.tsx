@@ -7,6 +7,7 @@ import Contact from './pages/Contact';
 import Licenses from './pages/Licenses';
 import Services from './pages/Services';
 import Projects from './pages/Projects';
+import ProjectDetail from './pages/ProjectDetail';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <Route path="/licenses" element={<Licenses />} />
             <Route path="/services" element={<Services />} />
             <Route path="/projects" element={<Projects />} />
+             <Route path="projects/:projectSlug" element={<ProjectDetail />} />
           </Route>
          
       </Routes>
