@@ -2,9 +2,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { ArrowRightIcon, ArrowPathIcon } from '@heroicons/react/24/outline';
 
-const PROJECTS_SHEET_URL =
-  'https://script.googleusercontent.com/macros/echo?user_content_key=AWDtjMVdbLtzJnxZbq_UB2w2EZE6AyaEusImoKN6yug3p5rsUPexdg5ZscmbePar2eZlYAol_kVUQDZnXrLpivh_tTGDIHdFo5ZOnkEKkWCC-hamnMUa3X1Ni7lzR49r9x_3uzXVeUYPFeLNzp3qWiG3fQYQpR1OZPvoNZ8Z6s0vfNhgbU0JdEljLtdzoFRM8cxLVXoVAQ-T4NnZKu_480fe_GArCH6cfcHNWtY-jWAvRVLbUNbKt_eeQ6pEcJaM-8K2o5vufzeaUM779pi0xcn2HoLvH0qcgg&lib=MDUQynqxKzQBWdUPMckp5L5jhakhqkjmR';
-
+const PROJECTS_SHEET_URL = import.meta.env.VITE_PROJECTS_SHEET_URL;
 const CACHE_KEY = 'skyscraper_projects';
 const CACHE_TTL = 10 * 60 * 1000; // 10 minutes (feel free to adjust)
 
