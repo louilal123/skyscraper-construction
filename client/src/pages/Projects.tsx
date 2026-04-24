@@ -1,56 +1,114 @@
 // src/pages/Projects.tsx
-import { Link } from 'react-router-dom';
-import { ArrowRightIcon } from '@heroicons/react/24/outline';
+import { useState, useEffect, useCallback } from 'react';
+import { ArrowRightIcon, ArrowPathIcon } from '@heroicons/react/24/outline';
 
-export const projectsData = [
-  {
-    id: '4-bedroom-bungalow',
-    title: '4 Bedroom Bungalow',
-    description: 'Modern design with complete amenities.',
-    image: 'https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&w=600',
-    location: 'Buenavista, Marinduque',
-    year: '2024',
-    fullDescription: 'A spacious single-story home featuring four bedrooms, open-plan living area, modern kitchen, and landscaped garden. Built with high-quality materials and energy-efficient design.',
-    gallery: [
-      'https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&w=600',
-      'https://images.pexels.com/photos/164558/pexels-photo-164558.jpeg?auto=compress&cs=tinysrgb&w=600',
-    ],
-  },
-  {
-    id: 'minimalist-2-bedroom',
-    title: 'Minimalist 2 Bedroom',
-    description: 'Cozy and efficient living space.',
-    image: 'https://images.pexels.com/photos/164558/pexels-photo-164558.jpeg?auto=compress&cs=tinysrgb&w=600',
-    location: 'Buenavista, Marinduque',
-    year: '2023',
-    fullDescription: 'A compact yet stylish home designed for modern living. Features clean lines, natural light, and smart storage solutions.',
-    gallery: [
-      'https://images.pexels.com/photos/164558/pexels-photo-164558.jpeg?auto=compress&cs=tinysrgb&w=600',
-      'https://images.pexels.com/photos/2587054/pexels-photo-2587054.jpeg?auto=compress&cs=tinysrgb&w=600',
-    ],
-  },
-  {
-    id: '3-bedroom-with-attic',
-    title: '3 Bedroom with Attic',
-    description: 'Spacious family home design.',
-    image: 'https://images.pexels.com/photos/2587054/pexels-photo-2587054.jpeg?auto=compress&cs=tinysrgb&w=600',
-    location: 'Buenavista, Marinduque',
-    year: '2024',
-    fullDescription: 'A two-story home with three bedrooms, convertible attic space, and a large backyard. Perfect for growing families.',
-    gallery: [
-      'https://images.pexels.com/photos/2587054/pexels-photo-2587054.jpeg?auto=compress&cs=tinysrgb&w=600',
-      'https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&w=600',
-    ],
-  },
-];
+const PROJECTS_SHEET_URL =
+  'https://script.googleusercontent.com/macros/echo?user_content_key=AWDtjMVdbLtzJnxZbq_UB2w2EZE6AyaEusImoKN6yug3p5rsUPexdg5ZscmbePar2eZlYAol_kVUQDZnXrLpivh_tTGDIHdFo5ZOnkEKkWCC-hamnMUa3X1Ni7lzR49r9x_3uzXVeUYPFeLNzp3qWiG3fQYQpR1OZPvoNZ8Z6s0vfNhgbU0JdEljLtdzoFRM8cxLVXoVAQ-T4NnZKu_480fe_GArCH6cfcHNWtY-jWAvRVLbUNbKt_eeQ6pEcJaM-8K2o5vufzeaUM779pi0xcn2HoLvH0qcgg&lib=MDUQynqxKzQBWdUPMckp5L5jhakhqkjmR';
+
+const CACHE_KEY = 'skyscraper_projects';
+const CACHE_TTL = 10 * 60 * 1000; // 10 minutes (feel free to adjust)
+
+interface SheetProject {
+  name: string;
+  description: string;
+  image_url: string;
+  date: string;
+}
 
 export default function Projects() {
+  const [projects, setProjects] = useState<SheetProject[]>([]);
+  const [loading, setLoading] = useState(true);      // only true if no cache at all
+  const [refreshing, setRefreshing] = useState(false); // true when manually refreshing
+  const [error, setError] = useState<string | null>(null);
+
+  // Helper: map raw Google sheet data to our interface
+  const mapProjects = (raw: any[]): SheetProject[] => {
+    return raw.map((item: any) => ({
+      name: item['Name'] || '',
+      description: item['Description'] || '',
+      image_url: item['Image URL'] || '',
+      date: item['Date'] ? String(item['Date']).trim() : '',
+    }));
+  };
+
+  // Helper: load from cache if fresh
+  const loadFromCache = (): SheetProject[] | null => {
+    try {
+      const cached = localStorage.getItem(CACHE_KEY);
+      if (!cached) return null;
+      const { data, timestamp } = JSON.parse(cached);
+      if (Date.now() - timestamp < CACHE_TTL) {
+        return data as SheetProject[];
+      }
+    } catch (e) {
+      // ignore corrupt cache
+    }
+    return null;
+  };
+
+  // Helper: save to cache
+  const saveToCache = (data: SheetProject[]) => {
+    try {
+      localStorage.setItem(CACHE_KEY, JSON.stringify({ data, timestamp: Date.now() }));
+    } catch (e) {
+      // ignore storage errors
+    }
+  };
+
+  // Fetch data from Google Sheets (either new or stale)
+  const fetchProjects = useCallback(async (showRefreshing = false) => {
+    if (showRefreshing) setRefreshing(true);
+    try {
+      const res = await fetch(PROJECTS_SHEET_URL);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const rawData = await res.json();
+      const mapped = mapProjects(rawData);
+      setProjects(mapped);
+      saveToCache(mapped);
+      setError(null);
+    } catch (err: any) {
+      console.error('Failed to fetch projects:', err);
+      setError(err.message);
+    } finally {
+      setLoading(false);
+      setRefreshing(false);
+    }
+  }, []);
+
+  // Initial load: try cache first, then fetch if needed
+  useEffect(() => {
+    const cached = loadFromCache();
+    if (cached) {
+      setProjects(cached);
+      setLoading(false);
+      // Optionally refresh in background
+      fetchProjects(false);
+    } else {
+      fetchProjects(false);
+    }
+  }, [fetchProjects]);
+
+  // Manual refresh button
+  const handleRefresh = () => {
+    fetchProjects(true);
+  };
+
   return (
     <div className="bg-gray-50">
       {/* Hero */}
       <section className="relative bg-gradient-to-br from-gray-800 to-gray-900 text-white py-14 md:py-18">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="text-3xl md:text-4xl font-bold mb-3">Our Projects</h1>
+          <div className="flex items-center justify-center gap-2">
+            <h1 className="text-3xl md:text-4xl font-bold mb-3">Our Projects</h1>
+            <button
+              onClick={handleRefresh}
+              disabled={refreshing}
+              className="inline-flex items-center justify-center p-2 rounded-full hover:bg-white/10 transition disabled:opacity-50"
+              title="Refresh projects"
+            >
+              <ArrowPathIcon className={`h-5 w-5 ${refreshing ? 'animate-spin' : ''}`} />
+            </button>
+          </div>
           <p className="text-gray-300 max-w-2xl mx-auto">
             Explore our portfolio of completed construction and engineering works.
           </p>
@@ -59,32 +117,61 @@ export default function Projects() {
 
       {/* Projects Grid */}
       <section className="container mx-auto px-4 py-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projectsData.map((project) => (
-            <div key={project.id} className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200 hover:shadow-lg transition group">
-              <div className="relative h-56">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition duration-300"
-                />
-              </div>
-              <div className="p-5">
-                <h3 className="text-xl font-bold text-gray-800 mb-1">{project.title}</h3>
-                <p className="text-gray-600 text-sm mb-3">{project.description}</p>
-                <div className="flex items-center justify-between">
-                  <span className="text-xs text-gray-500">{project.location} • {project.year}</span>
-                  <Link
-                    to={`/projects/${project.id}`}
-                    className="text-orange-600 font-medium text-sm inline-flex items-center gap-1 hover:gap-2 transition-all"
-                  >
-                    View Project <ArrowRightIcon className="h-4 w-4" />
-                  </Link>
+        {loading && (
+          <div className="text-center text-gray-500 py-20">Loading projects…</div>
+        )}
+        {error && !projects.length && (
+          <div className="text-center text-red-500 py-20">
+            Failed to load projects: {error}
+          </div>
+        )}
+        {!loading && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {projects.map((project, idx) => (
+              <div
+                key={idx}
+                className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200 hover:shadow-lg transition group"
+              >
+                <div className="relative h-56">
+                  {project.image_url && (
+                    <img
+                      src={project.image_url}
+                      alt={project.name}
+                      className="w-full h-full object-cover group-hover:scale-105 transition duration-300"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = 'none';
+                      }}
+                    />
+                  )}
+                  {!project.image_url && (
+                    <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+                      <span className="text-gray-400">No image</span>
+                    </div>
+                  )}
+                </div>
+                <div className="p-5">
+                  <h3 className="text-xl font-bold text-gray-800 mb-1">
+                    {project.name}
+                  </h3>
+                  <p className="text-gray-600 text-sm mb-3 line-clamp-3">
+                    {project.description}
+                  </p>
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs text-gray-500">
+                      {project.date ? `Completed: ${project.date}` : ''}
+                    </span>
+                    <span className="text-orange-600 font-medium text-sm inline-flex items-center gap-1 opacity-0 group-hover:opacity-100 transition">
+                      View Project <ArrowRightIcon className="h-4 w-4" />
+                    </span>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
+        {!loading && !error && projects.length === 0 && (
+          <div className="text-center text-gray-500 py-20">No projects found.</div>
+        )}
       </section>
     </div>
   );

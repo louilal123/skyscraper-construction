@@ -4,14 +4,11 @@ import path from 'path';
 // Load .env from the same directory as this file
 dotenv.config({ path: path.resolve(__dirname, '.env') });
 
-// Quick verification (remove after confirming it works)
-console.log('GROQ key loaded:', process.env.GROQ_API_KEY ? '✅' : '❌');
 
 import express from 'express';
 import cors from 'cors';
 import chatRouter from './routes/chat';
 import testRouter from './routes/testroute';
-
 const app = express();
 
 const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
@@ -26,10 +23,10 @@ app.use(express.json());
 app.use('/api/test', testRouter);
 app.use('/api/chat', chatRouter);
 
-app.listen(PORT, HOST, () => {
-    console.log(`Server running on http://${HOST}:${PORT}`);
-});
-
-// app.listen(PORT, () => {
-//     console.log(`Server running on http://localhost:${PORT}`);
+// app.listen(PORT, HOST, () => {
+//     console.log(`Server running on http://${HOST}:${PORT}`);
 // });
+
+app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
+});
