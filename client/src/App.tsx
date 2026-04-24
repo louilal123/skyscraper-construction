@@ -8,6 +8,7 @@ import Licenses from './pages/Licenses';
 import Services from './pages/Services';
 import Projects from './pages/Projects';
 import ProjectDetail from './pages/ProjectDetail';
+import GetEstimate from './pages/GetEstimate';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route path="/services" element={<Services />} />
             <Route path="/projects" element={<Projects />} />
              <Route path="projects/:projectSlug" element={<ProjectDetail />} />
+             <Route path="get-estimate" element={<GetEstimate />} />
           </Route>
          
       </Routes>

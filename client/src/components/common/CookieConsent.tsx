@@ -10,8 +10,7 @@ export default function CookieConsent() {
   useEffect(() => {
     const consent = localStorage.getItem('cookie_consent');
     if (!consent) {
-      // Slight delay so it doesn't pop up instantly
-      timerRef.current = setTimeout(() => setVisible(true), 1000);
+      timerRef.current = setTimeout(() => setVisible(true), 5000);
     }
     return () => {
       if (timerRef.current) clearTimeout(timerRef.current);
