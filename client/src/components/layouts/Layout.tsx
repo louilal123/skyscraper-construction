@@ -13,6 +13,7 @@ import {
 } from '@heroicons/react/24/outline';
 import logoImage from '../../assets/logo_sky.jpg';
 import ChatBot from '../../components/chat/ChatBot';
+import CookieConsent from '../../components/common/CookieConsent';
 
 export default function Layout() {
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
@@ -184,6 +185,8 @@ export default function Layout() {
       </footer>
 
       <ChatBot />
+
+      <CookieConsent />
     </div>
   );
 }
